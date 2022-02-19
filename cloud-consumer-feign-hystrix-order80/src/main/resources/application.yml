@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+
+#   实际测试中发现在下列被注释时，hystrix的@HystrixCommand方法仍可用（只需在主启动类上加@EnableHystrix）
+#   为什么？？？ 是@EnableHystrix将他打开了吗？
+#   似乎是因为feign:hystrix:enabled 这个配置是针对feign集成Hystrix的开关，针对是通过feign的属性配置熔断和降级使用的
+#   而我之前所使用的只是@EnableHystrix的功能，而不是feign集成Hystrix的功能
+feign:
+  hystrix:
+    enabled: true
