@@ -1,3 +1,27 @@
 server:
   port: 3344
 
+spring:
+  application:
+    name:  cloud-config-center #注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:CookedT/springcloud-config.git #GitHub上面的git仓库名字
+          ####搜索目录
+          search-paths:
+            - springcloud-config
+      ####读取分支
+      label: main
+      request-connect-timeout: 5
+
+# SpringCloud Config 使用ssh连接github报错： 详细见：https://blog.csdn.net/bangshao_/article/details/113049944
+  #java Caused by: com.jcraft.jsch.JSchException: Auth fail
+
+#服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
