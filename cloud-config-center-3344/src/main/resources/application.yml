@@ -16,12 +16,28 @@ spring:
       label: main
       request-connect-timeout: 5
 
-# SpringCloud Config 使用ssh连接github报错： 详细见：https://blog.csdn.net/bangshao_/article/details/113049944
+  # SpringCloud Config 使用ssh连接github报错： 详细见：https://blog.csdn.net/bangshao_/article/details/113049944
   #java Caused by: com.jcraft.jsch.JSchException: Auth fail
+
+#rabbitmq相关配置
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
 
 #服务注册到eureka地址
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka
+
+##rabbitmq相关配置,暴露bus刷新配置的端点
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
+# /actuator/bus-refresh/config-client:{3355,3366，。。。}        多个 不全部
+
 
